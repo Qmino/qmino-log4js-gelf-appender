@@ -1,10 +1,11 @@
 # qmino-log4js-gelf-appender
+Note: This is a first version.
 
-This project contains an appender for log4js. This is the appender we at Qmino use in order to perform client side logging using graylog.
+This project contains an appender for log4js that can be used to send log messages to a graylog HTTP input.
 
-The appender sends logs to graylog in the GELF format. The appender works as follows:
+The appender sends logs to graylog in the GELF format. It works as follows:
 
-* It has a cache size which contains recent log messages (of any level)
+* It has a cache size which contains recent log messages (of any level). Any logged message is added to the cache.
 * It has a configurable logging level threshold.
 * When something is logged with a logging level greater or equal than the configured logging level threshold, the appender sends the logging cache to graylog and clears the cache.
 
