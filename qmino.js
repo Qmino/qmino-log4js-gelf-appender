@@ -4,8 +4,9 @@
  * it is sent along with a configurable amount of previous logging messages (of any level) that came before the
  * threshold exceeding one.
  */
-Log4js.QminoAppender = function (loggingUrl, ajaxThreshold, bufferSize) {
-    this.loggingUrl = loggingUrl;
+Log4js.QminoAppender = function (loggingHost, path, ajaxThreshold, bufferSize) {
+    this.loggingHost = loggingHost;
+    this.path = path;
     this.ajaxThreshold = ajaxThreshold;
     this.bufferSize = bufferSize;
     this.buffer = [];
@@ -39,7 +40,7 @@ Log4js.QminoAppender.prototype = Log4js.extend(new Log4js.Appender(), {
     sendGelfObjects: function (gelfObjects) {
         for (var i = 0; i < gelfObjects.length; i++) {
             var http = new XMLHttpRequest();
-            http.open("POST", this.loggingUrl, true);
+            http.open("POST", this.loggingHost + this.path, true);
             http.onreadystatechange = function () {
                 //TODO: do stuff.
             }
